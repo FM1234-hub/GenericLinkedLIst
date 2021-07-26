@@ -1,6 +1,5 @@
 #include "LinkedList.h"
 #include "Persona.h"
-//Copy, move constructor
 int main()
 {
     List<int> l1;

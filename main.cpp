@@ -1,5 +1,5 @@
 #include "LinkedList.h"
-
+#include "Persona.h"
 //Copy, move constructor
 int main()
 {
@@ -27,6 +27,30 @@ int main()
     std::cout << std::endl;
     l2.remove(3);
     for (Iterator<int> i = l2.begin(); i != l2.end(); i++)
+    {
+        std::cout << *i << "-->";
+    }
+    std::cout << std::endl;
+    Persona p1("Fabrizio", 22);
+    Persona p2("Juan", 18);
+    Persona p3("Leonardo", 20);
+    Persona p4("Maria", 15);
+    Persona p5("Melissa", 23);
+    Persona p6("Carlos", 30);
+    List<Persona> p;
+    p.push_front(p3);
+    p.push_back(p2);
+    p.push_back(p1);
+    p.push_back(p4);
+    p.insert(2, p5);
+    p.push_back(p6);
+    for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
+    {
+        std::cout << *i << "-->";
+    }
+    p.remove(3);
+    std::cout << std::endl;
+    for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
     {
         std::cout << *i << "-->";
     }

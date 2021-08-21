@@ -9,8 +9,7 @@ int main()
     l1.push_back(10);
     l1.insert(2, 4);
     l1.push_back(9);
-
-    for (Iterator<int> iterator = l1.begin(); iterator != l1.end(); ++iterator)
+    /*for (Iterator<int> iterator = l1.begin(); iterator != l1.end(); ++iterator)
     {
         std::cout << *iterator << "-->";
     }
@@ -28,7 +27,7 @@ int main()
     for (Iterator<int> i = l2.begin(); i != l2.end(); i++)
     {
         std::cout << *i << "-->";
-    }
+    }*/
     std::cout << std::endl;
     Persona p1("Fabrizio", 22);
     Persona p2("Juan", 18);
@@ -36,6 +35,8 @@ int main()
     Persona p4("Maria", 15);
     Persona p5("Melissa", 23);
     Persona p6("Carlos", 30);
+    Persona p7 = p1;
+    std::cout << p7 << std::endl;
     List<Persona> p;
     p.push_front(p3);
     p.push_back(p2);
@@ -43,7 +44,7 @@ int main()
     p.push_back(p4);
     p.insert(2, p5);
     p.push_back(p6);
-    for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
+    /*for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
     {
         std::cout << *i << "-->";
     }
@@ -52,5 +53,5 @@ int main()
     for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
     {
         std::cout << *i << "-->";
-    }
+    }*/
 }

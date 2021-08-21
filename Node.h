@@ -2,10 +2,6 @@
 #define __NODE_H__
 #include <iostream>
 template <typename T>
-class Node;
-template <typename T>
-std::ostream &operator<<(std::ostream &out, const Node<T> &node);
-template <typename T>
 class Node
 {
 private:
@@ -19,14 +15,7 @@ public:
     T getValue();
     void setNext(Node<T> *next);
     Node<T> *getNext();
-    friend std::ostream &operator<<<>(std::ostream &out, const Node &node);
 };
-template <typename T>
-std::ostream &operator<<(std::ostream &out, const Node<T> &node)
-{
-    out << node.value;
-    return out;
-}
 template <typename T>
 void Node<T>::setValue(T value)
 {

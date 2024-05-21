@@ -1,5 +1,6 @@
-#ifndef __LINKEDLIST_H__
-#define __LINKEDLIST_H__
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
 #include "Node.h"
 #include "Iterator.h"
 template <typename T>
@@ -15,7 +16,7 @@ private:
     int size;
 
 public:
-    List(); //default constructor
+    List(); // default constructor
     List(const List<T> &o);
     List(List<T> &&o) : size{o.size}, head{o.head}, tail{o.tail}
     {
@@ -23,7 +24,7 @@ public:
         o.head = nullptr;
         o.tail = nullptr;
     }
-    ~List(); //Destructor
+    ~List(); // Destructor
     int getSize() const;
     void push_front(T value);
     void push_back(T append);
@@ -31,12 +32,18 @@ public:
     void pop_front();
     void pop_back();
     void remove(int pos);
+    void eliminar(T value);
+    bool find(T value);
+    bool isempty();
+    void printLots(List<T> P);
     List &operator=(const List<T> &o);
     Iterator<T> begin();
     Iterator<T> end();
-    friend std::ostream &operator<<<>(std::ostream &os, const List &o);
+    template <typename U>
+    friend class Iterator;
+    friend std::ostream &operator<< <>(std::ostream &os, const List &o);
 };
-//Cout overloading
+// Cout overloading
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const List<T> &o)
 {
@@ -48,12 +55,20 @@ std::ostream &operator<<(std::ostream &os, const List<T> &o)
     }
     while (currentNode != nullptr)
     {
-        os << currentNode->getValue() << "-->";
-        currentNode = currentNode->getNext();
+        if (currentNode->getNext() == nullptr)
+        {
+            os << currentNode->getValue();
+            currentNode = currentNode->getNext();
+        }
+        else
+        {
+            os << currentNode->getValue() << "-->";
+            currentNode = currentNode->getNext();
+        }
     }
     return os;
 }
-//Iterators
+// Iterators
 template <typename T>
 Iterator<T> List<T>::begin()
 {
@@ -64,7 +79,7 @@ Iterator<T> List<T>::end()
 {
     return Iterator<T>(tail);
 }
-//Constructors
+// Constructors
 template <typename T>
 List<T>::List()
 {
@@ -83,7 +98,7 @@ List<T>::List(const List<T> &o)
         this->push_back(*i);
     }
 }
-//Assignment operator
+// Assignment operator
 template <typename T>
 List<T> &List<T>::operator=(const List<T> &o)
 {
@@ -92,19 +107,18 @@ List<T> &List<T>::operator=(const List<T> &o)
     return *this;
 }
 
-//Destructor
+// Destructor
 template <typename T>
 List<T>::~List()
 {
-    Node<T> *currentNode;
+    Node<T> *currentNode = head;
     while (currentNode != nullptr)
     {
-        currentNode = head;
         head = head->getNext();
         delete currentNode;
     }
 }
-//Removing
+// Removing
 template <typename T>
 void List<T>::pop_front()
 {
@@ -143,6 +157,79 @@ void List<T>::remove(int pos)
     }
 }
 template <typename T>
+bool List<T>::isempty()
+{
+    if (this->head == nullptr)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+template <typename T>
+void List<T>::eliminar(T value)
+{
+    if (this->head)
+    {
+        Node<T> *currentNode = this->head;
+        if (this->head->value == value)
+        {
+            this->head = currentNode->getNext();
+            delete currentNode;
+        }
+        Node<T> *previousNode = nullptr;
+        while (currentNode->getNext())
+        {
+            previousNode = currentNode;
+            if (currentNode->value == value)
+            {
+                previousNode->setNext(currentNode->getNext());
+                delete currentNode;
+                size--;
+            }
+            currentNode = previousNode->getNext();
+        }
+    }
+}
+
+template <typename T>
+bool List<T>::find(T value)
+{
+    if (this->head->value == value)
+    {
+        return true;
+    }
+    Node<T> *currentNode = this->head;
+    while (currentNode->getNext() != nullptr)
+    {
+        if (currentNode->value == value)
+        {
+            return true;
+        }
+        currentNode = currentNode->getNext();
+    }
+    return false;
+}
+template <typename T>
+void List<T>::printLots(List<T> P)
+{
+    Node<T> *currentNode = this->head;
+    Node<T> *currentNode2 = P.head;
+    int i = 1;
+    while (currentNode && currentNode2)
+    {
+        if (i = currentNode2->value)
+        {
+            std::cout << currentNode->value << std::endl;
+            currentNode2 = currentNode2->getNext();
+        }
+        currentNode = currentNode->getNext();
+        i++;
+    }
+}
+template <typename T>
 void List<T>::pop_back()
 {
     if (head != nullptr)
@@ -166,7 +253,7 @@ void List<T>::pop_back()
         size--;
     }
 }
-//Insertion
+// Insertion
 template <typename T>
 void List<T>::push_front(T value)
 {
@@ -240,11 +327,11 @@ void List<T>::insert(int pos, T value)
     }
     size++;
 }
-//Accesors
+// Accesors
 template <typename T>
 int List<T>::getSize() const
 {
     return size;
 }
 
-#endif
+#endif // LINKEDLIST_H

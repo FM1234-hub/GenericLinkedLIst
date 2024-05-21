@@ -44,7 +44,7 @@ int main()
     p.push_back(p4);
     p.insert(2, p5);
     p.push_back(p6);
-    /*for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
+    for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
     {
         std::cout << *i << "-->";
     }
@@ -53,5 +53,6 @@ int main()
     for (Iterator<Persona> i = p.begin(); i != p.end(); i++)
     {
         std::cout << *i << "-->";
-    }*/
+    }
+    return 0;
 }

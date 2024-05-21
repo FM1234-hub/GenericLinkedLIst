@@ -10,12 +10,23 @@ private:
 
 public:
     Iterator(Node<T> *ptr) : Position(ptr) {}
+    Iterator() : Position(nullptr) {}
+    Iterator operator+(const Iterator &b);
     bool operator==(const Iterator &i);
     bool operator!=(const Iterator &i);
     T operator*();
     Iterator &operator++();
     Iterator operator++(int);
 };
+template <typename T>
+Iterator<T> Iterator<T>::operator+(const Iterator &b)
+{
+    while (this->Position != b.Position)
+    {
+        this->Position = Position->getNext();
+    }
+    return *this;
+}
 template <typename T>
 bool Iterator<T>::operator==(const Iterator &i)
 {

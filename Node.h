@@ -1,5 +1,6 @@
-#ifndef __NODE_H__
-#define __NODE_H__
+#ifndef NODE_H
+#define NODE_H
+
 #include <iostream>
 template <typename T>
 class Node
@@ -7,6 +8,8 @@ class Node
 private:
     T value;
     Node<T> *next;
+    template <typename U>
+    friend class List;
 
 public:
     Node() : next(nullptr) {}
@@ -36,4 +39,5 @@ Node<T> *Node<T>::getNext()
 {
     return next;
 }
-#endif
+
+#endif // NODE_H
